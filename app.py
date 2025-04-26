@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from db import init_db
 from models import *
 
+
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
