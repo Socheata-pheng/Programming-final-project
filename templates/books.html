@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Book Information</h2>
+
+<!-- Form to Add/Update/Delete a Book -->
+<form method="POST" class="row g-3 mb-4" id="bookForm">
+    <div class="col-md-3">
+        <input type="text" name="book_id" id="book_id" class="form-control" placeholder="Book ID" required>
+    </div>
+    <div class="col-md-3">
+        <input type="text" name="title" id="title" class="form-control" placeholder="Book Title" required>
+    </div>
+    <div class="col-md-3">
+        <input type="text" name="author" id="author" class="form-control" placeholder="Author" required>
+    </div>
+    <div class="col-md-3">
+        <input type="number" name="year" id="year" class="form-control" placeholder="Year" required>
+    </div>
+    <div class="col-md-3">
+        <input type="text" name="price" id="price" class="form-control" placeholder="Price" required>
+    </div>
+    <div class="col-md-3">
+        <select name="status" id="status" class="form-select" required>
+            <option value="">Select Status</option>
+            <option value="available">Available</option>
+            <option value="unavailable">Unavailable</option>
+        </select>
+    </div>
+
+    <div class="col-12">
+        <!-- Add, Update, and Delete buttons will submit the corresponding action -->
+        <button type="submit" name="action" value="add" class="btn btn-success">Add</button>
+        <button type="submit" name="action" value="update" class="btn btn-warning">Update</button>
+        <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
+    </div>
+        
+</form>
+
+<!-- Book Table -->
+<table class="table table-bordered" id="booksTable">
+    <thead class="table-dark">
+        <tr>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th>Price</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr onclick="fillForm('{{ book.book_id }}', '{{ book.title }}', '{{ book.author }}', '{{ book.year }}', '{{ book.price }}', '{{ book.status }}')">
+            <td>{{ book.book_id }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.year }}</td>
+            <td>{{ book.price }}</td>
+            <td>{{ book.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    function fillForm(book_id, title, author, year, price, status) {
+        document.getElementById('book_id').value = book_id;
+        document.getElementById('title').value = title;
+        document.getElementById('author').value = author;
+        document.getElementById('year').value = year;
+        document.getElementById('price').value = price;
+        document.getElementById('status').value = status;
+    }
+
+    // Clear the form for adding new books
+    function clearForm() {
+        document.getElementById('bookForm').reset();
+    }
+</script>
+{% endblock %}
