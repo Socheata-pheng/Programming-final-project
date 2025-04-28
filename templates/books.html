@@ -1,44 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Book Information</h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Book Information</h2>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
 
-<!-- Form to Add/Update/Delete a Book -->
 <form method="POST" class="row g-3 mb-4" id="bookForm">
     <div class="col-md-3">
-        <input type="text" name="book_id" id="book_id" class="form-control" placeholder="Book ID" required>
+        <label for="book_id" class="form-label">Book ID</label>
+        <input type="text" name="book_id" id="book_id" class="form-control" required>
     </div>
     <div class="col-md-3">
-        <input type="text" name="title" id="title" class="form-control" placeholder="Book Title" required>
+        <label for="title" class="form-label">Title</label>
+        <input type="text" name="title" id="title" class="form-control" required>
     </div>
     <div class="col-md-3">
-        <input type="text" name="author" id="author" class="form-control" placeholder="Author" required>
+        <label for="author" class="form-label">Author</label>
+        <input type="text" name="author" id="author" class="form-control" required>
     </div>
     <div class="col-md-3">
-        <input type="number" name="year" id="year" class="form-control" placeholder="Year" required>
+        <label for="year" class="form-label">Year</label>
+        <input type="number" name="year" id="year" class="form-control" required>
     </div>
     <div class="col-md-3">
-        <input type="text" name="price" id="price" class="form-control" placeholder="Price" required>
+        <label for="price" class="form-label">Price</label>
+        <input type="text" name="price" id="price" class="form-control" required>
     </div>
     <div class="col-md-3">
+        <label for="status" class="form-label">Status</label>
         <select name="status" id="status" class="form-select" required>
             <option value="">Select Status</option>
             <option value="available">Available</option>
             <option value="unavailable">Unavailable</option>
         </select>
     </div>
-
-    <div class="col-12">
-        <!-- Add, Update, and Delete buttons will submit the corresponding action -->
+    <div class="col-12 d-flex gap-2">
         <button type="submit" name="action" value="add" class="btn btn-success">Add</button>
         <button type="submit" name="action" value="update" class="btn btn-warning">Update</button>
         <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
     </div>
-        
 </form>
 
-<!-- Book Table -->
-<table class="table table-bordered" id="booksTable">
+<table class="table table-hover table-bordered">
     <thead class="table-dark">
         <tr>
             <th>Book ID</th>
@@ -52,12 +56,12 @@
     <tbody>
         {% for book in books %}
         <tr onclick="fillForm('{{ book.book_id }}', '{{ book.title }}', '{{ book.author }}', '{{ book.year }}', '{{ book.price }}', '{{ book.status }}')">
-            <td>{{ book.book_id }}</td>
-            <td>{{ book.title }}</td>
-            <td>{{ book.author }}</td>
-            <td>{{ book.year }}</td>
-            <td>{{ book.price }}</td>
-            <td>{{ book.status }}</td>
+            <td style="background-color: #f0f0f0;">{{ book.book_id }}</td>
+            <td style="background-color: #f0f0f0;">{{ book.title }}</td>
+            <td style="background-color: #f0f0f0;">{{ book.author }}</td>
+            <td style="background-color: #f0f0f0;">{{ book.year }}</td>
+            <td style="background-color: #f0f0f0;">{{ book.price }}</td>
+            <td style="background-color: #f0f0f0;">{{ book.status }}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -73,7 +77,6 @@
         document.getElementById('status').value = status;
     }
 
-    // Clear the form for adding new books
     function clearForm() {
         document.getElementById('bookForm').reset();
     }

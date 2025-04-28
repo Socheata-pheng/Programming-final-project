@@ -1,24 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-4">
-        <div class="card shadow">
-            <div class="card-body">
-                <h4 class="text-center mb-4">Admin Login</h4>
-                <form method="POST">
-                    <div class="mb-3">
-                        <label>Username</label>
-                        <input type="text" name="username" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Password</label>
-                        <input type="password" name="password" class="form-control" required>
-                    </div>
-                    <button class="btn btn-dark w-100">Login</button>
-                </form>
-            </div>
+  <style>
+    body {
+      background: url("{{ url_for('static', filename='images/library-bg.jpg') }}")
+                  no-repeat center center fixed;
+      /* adjust this to taste: cover, contain, or specific % sizing */
+      background-size: 100%;
+    }
+  </style>
+
+  <div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
+    <div class="card shadow-lg p-4"
+         style="width: 400px; backdrop-filter: blur(10px); background: rgba(255,255,255,0.85);">
+      <h4 class="text-center mb-4">Admin Login</h4>
+      <form method="POST">
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input type="text" name="username" class="form-control" required>
         </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" required>
+        </div>
+        <button class="btn btn-dark w-100">Login</button>
+      </form>
     </div>
-</div>
+  </div>
 {% endblock %}
